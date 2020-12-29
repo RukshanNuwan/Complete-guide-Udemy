@@ -14,6 +14,12 @@ export default function App() {
     ]);
   }
 
+  const removeGoalHandler = goalId => {
+    setCourseGoals(currentGoals => {
+      return currentGoals.filter((goal) => goal.key !== goalId); // pressed item remove from the array and other items move to the new array
+    });
+  }
+
 
   return (
     <View style={styles.screen}>
@@ -22,7 +28,13 @@ export default function App() {
       <FlatList
         keyExtractor={(item, index) => item.key}
         data={courseGoals}
-        renderItem={itemData => <GoalItem onDelete={() => console.log('Does it delete?')} title={itemData.item.value} />}
+        renderItem={itemData => (
+          <GoalItem
+            id={itemData.item.key}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
       />
     </View>
   );
