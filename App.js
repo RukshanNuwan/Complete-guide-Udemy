@@ -14,6 +14,7 @@ export default function App() {
     ]);
   }
 
+
   return (
     <View style={styles.screen}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -21,7 +22,7 @@ export default function App() {
       <FlatList
         keyExtractor={(item, index) => item.key}
         data={courseGoals}
-        renderItem={itemData => <GoalItem title={itemData.item.value} />}
+        renderItem={itemData => <GoalItem onDelete={() => console.log('Does it delete?')} title={itemData.item.value} />}
       />
     </View>
   );
