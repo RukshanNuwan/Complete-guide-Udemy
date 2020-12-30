@@ -13,20 +13,26 @@ export default function App() {
       ...currentGoals,
       { id: Math.random().toString(), value: goalTitle } // id can replace with key
     ]);
-  }
+
+    setIsAddMode(false);  // to hide modal after add new goal
+  };
 
   const removeGoalHandler = goalId => {
     setCourseGoals(currentGoals => {
       return currentGoals.filter((goal) => goal.id !== goalId); // pressed item remove from the array and other items move to the new array
     });
-  }
+  };
+
+  const cancelGoalAdditionHandler = () => {
+    setIsAddMode(false);
+  };
 
 
   return (
     <View style={styles.screen}>
       <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
 
-      <GoalInput visible={isAddMode} onAddGoal={addGoalHandler} />
+      <GoalInput visible={isAddMode} onAddGoal={addGoalHandler} onCancel={cancelGoalAdditionHandler} />
 
       <FlatList
         keyExtractor={(item, index) => item.id}
